@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -46,5 +49,29 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
+
+        $this->renderable(function (RouteNotFoundException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => "Votres session a expiré, veuillez vous reconnecter",
+                    'error' => $e->getMessage(),
+                ], 401);
+            }
+        });
+
+        $this->renderable(function (UnauthorizedException $e, $request) {
+            if ($request->is('api/*')) {
+                return response([
+                    'status' => 'error',
+                    'message' => "Vous n'êtes pas habilité à accéder à cette ressource (" . $e->getMessage() . ")",
+                    'error' => $e->getMessage()
+                ], 403);
+            }
+        });
     }
+
+
+
 }

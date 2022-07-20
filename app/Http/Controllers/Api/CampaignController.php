@@ -11,7 +11,6 @@ class CampaignController extends Controller
     //
     public function index(){
 
-        $users = VicidialCampaign::all();
-        return $users;
+        return VicidialCampaign::all();
     }
 }

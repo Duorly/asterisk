@@ -24,11 +24,16 @@ use App\Http\Controllers\Api\Auth\AuthController;
 // });
 
 
-// Ressources api route
-Route::apiResource('/users', UserController::class);
+// Group route by middleware
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::apiResource('/users', UserController::class);
 Route::apiResource('/status', StatusController::class);
 Route::apiResource('/campaign', CampaignController::class);
 Route::apiResource('/list', ListController::class);
+});
+
+// Ressources api route
+
 
 
 Route::post('/auth', [AuthController::class, 'authenticate']);
