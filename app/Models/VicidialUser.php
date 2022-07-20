@@ -7,11 +7,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class VicidialUser
- * 
+ *
  * @property int $user_id
  * @property string $user
  * @property string $pass
@@ -160,6 +163,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class VicidialUser extends Model
 {
+
+    use HasApiTokens, HasFactory, Notifiable;
+
 	protected $table = 'vicidial_users';
 	protected $primaryKey = 'user_id';
 	public $timestamps = false;

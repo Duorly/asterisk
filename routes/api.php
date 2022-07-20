@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ListController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\CampaignController;
+use App\Http\Controllers\Api\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::apiResource('/users', UserController::class);
 Route::apiResource('/status', StatusController::class);
 Route::apiResource('/campaign', CampaignController::class);
 Route::apiResource('/list', ListController::class);
+
+
+Route::post('/auth', [AuthController::class, 'authenticate']);
