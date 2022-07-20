@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class VicidialList
- * 
+ *
  * @property int $list_id
  * @property string|null $list_name
  * @property string|null $campaign_id
@@ -58,7 +58,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class VicidialList extends Model
 {
-	protected $table = 'vicidial_lists';
+	protected $table = 'vicidial_list';
 	protected $primaryKey = 'list_id';
 	public $incrementing = false;
 	public $timestamps = false;
